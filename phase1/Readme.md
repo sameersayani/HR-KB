@@ -31,7 +31,7 @@ pip install -r requirements.txt
 ## 📚 Run the steps in order
 
 ```bash
-# Step 1: Your first Gemini call
+# Step 1: Your first Gemini/Groq call
 python phase1/step1_first_call.py
 
 # Step 2: Prompt templates
