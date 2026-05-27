@@ -101,3 +101,6 @@ adding a real web search for the LOW path.
 - [ ] step4: Admin UI lets you upload a new document
 - [ ] step5: smart_query() returns the right tier for different questions
 - [ ] exercise: Full app works — both admin and chat modes
+
+
+## streamlit run exercise_hr_app.py --server.port 8520 --client.showErrorDetails=false --server.headless=true

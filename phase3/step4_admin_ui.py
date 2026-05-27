@@ -229,4 +229,4 @@ with tab_documents:
                 df = pd.DataFrame(all_docs)[["country", "filename", "chunk_count"]]
                 df.columns = ["Country", "Filename", "Chunks"]
                 df = df.sort_values(["Country", "Filename"])
-                st.dataframe(df, use_container_width=True, hide_index=True)
+                st.dataframe(df, width="stretch", hide_index=True)
