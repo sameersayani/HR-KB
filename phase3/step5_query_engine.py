@@ -204,13 +204,18 @@ if __name__ == "__main__":
         ("How many days annual leave in India?",    "india"),
         ("What is the 401k matching policy?",       "usa"),
         ("How does UK shared parental leave work?", "uk"),
+        ("What is the leave policy in Mauritius?",  "mauritius"),
 
         # MEDIUM confidence — supplemented answer
-        ("Can I take leave without prior approval?","india"),
+        ("Can I take leave without prior approval?",     "india"),
+        ("What are the rules around working remotely?",  "usa"),
+        ("How does redundancy pay work?",                "uk"),
+        ("What about minimum work contract duration?",   "mauritius"),
 
         # LOW confidence — should route to web search
         ("What are the visa sponsorship options?",  "india"),
         ("Explain cryptocurrency tax in the UK",    "uk"),
+        ("What about work permits?",                "mauritius"),
     ]
 
     for question, country in test_queries:

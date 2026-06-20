@@ -140,9 +140,11 @@ test_cases = [
     ("How many days of annual leave do I get?",     "india", "HIGH"),
     ("What is the maternity leave policy?",         "usa",   "HIGH"),
     ("What is the notice period in UK?",            "uk",    "HIGH"),
+    ("What is the leave policy in Mauritius?",      "mauritius", "HIGH"),
     ("Can I work remotely from another country?",   "india", "MEDIUM"),
     ("What are the visa sponsorship rules?",        "usa",   "LOW"),
     ("Explain quantum entanglement",                "uk",    "LOW"),
+    ("What about work permits?",                    "mauritius", "LOW"),
 ]
 
 print("\n" + "="*55)

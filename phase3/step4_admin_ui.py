@@ -25,7 +25,7 @@ import tempfile, os
 
 VECTOR_STORE_PATH = "vectorstore/hr_chroma_db"
 SUPPORTED_COUNTRIES = [
-    "India", "USA", "UK", "Germany", "Australia",
+    "India", "USA", "UK", "Mauritius", "Germany", "Australia",
     "Canada", "Singapore", "UAE", "France", "Japan",
 ]
 

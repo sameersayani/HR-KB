@@ -145,7 +145,7 @@ print("="*55 + "\n")
 
 query = "maternity leave"
 
-for country in ["india", "usa", "uk"]:
+for country in ["india", "usa", "uk", "mauritius"]:
     results = vectorstore.similarity_search(
         query, k=1, filter={"country": country}
     )

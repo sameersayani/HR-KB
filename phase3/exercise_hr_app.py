@@ -5,6 +5,8 @@
 # ============================================================
 
 # --- FIX 1: SILENCE LOGGER NOISE (Must be at the very top) ---
+import tempfile
+
 import streamlit as st  # <-- Move this to the absolute line 1!
 import logging
 import warnings
@@ -33,7 +35,7 @@ from phase3.step5_query_engine import smart_query
 
 VECTOR_STORE_PATH   = "vectorstore/hr_chroma_db"
 SUPPORTED_COUNTRIES = [
-    "india", "usa", "uk", "germany", "australia",
+    "india", "usa", "uk", "mauritius", "germany", "australia",
     "canada", "singapore", "uae", "france", "japan",
 ]
 
