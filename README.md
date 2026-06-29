@@ -9,6 +9,7 @@ How this repo is organized
 - **phase2/**: Document ingestion, text-splitting, embeddings, and a vector store. Key artifacts: [phase2/step1_document_loading.py](phase2/step1_document_loading.py) → loaders, [phase2/step3_embeddings.py](phase2/step3_embeddings.py) → embeddings, and the Chroma DB under [phase2/vectorstore/hr_chroma_db/](phase2/vectorstore/hr_chroma_db/).
 - **phase3/**: Multitenant store and query engine; adds a document manager, confidence scoring, and an admin UI prototype. See [phase3/exercise_hr_app.py](phase3/exercise_hr_app.py) and modular steps [phase3/step1_multitenant_store.py](phase3/step1_multitenant_store.py) → [phase3/step5_query_engine.py](phase3/step5_query_engine.py).
 - **phase4/**: Experimental LangGraph integration and graph-based state for richer workflows and chaining. Main entry: [phase4/exercise_hr_langgraph_app.py](phase4/exercise_hr_langgraph_app.py) and supporting steps in [phase4/](phase4/).
+- **phase5/**: Multi-agent HR assistant prototype with specialized subagents and a supervisor orchestrating task delegation, summarization, and workflow coordination. See [phase5/exercise_multiagent_app.py](phase5/exercise_multiagent_app.py) and the phase step files.
 
 Data
 - User-provided policy documents are placed under `phase2/data/uploads/` and `phase3/data/uploads/` by country (e.g., `usa`, `uk`, `india`, `mauritius`). Example files: [phase2/data/uploads/usa/hr_policy_usa.txt](phase2/data/uploads/usa/hr_policy_usa.txt).
@@ -19,6 +20,7 @@ What each Phase does (summary)
 - **Phase 2 — Ingestion & RAG Pipeline**: Implements document loaders, text splitting, embedding generation, and a vector store for retrieval. It demonstrates sample RAG chains and how to persist vectors for reuse.
 - **Phase 3 — Multitenancy & Query Engine**: Adds document management for multiple tenants/countries, confidence scoring for answers, and a simple admin UI to inspect data and query behavior. Focuses on UX for non-technical users and explainability.
 - **Phase 4 — Graph Workflows (LangGraph)**: Experimental integration with LangGraph to model graph state, complex node orchestration, and web search integration. Explores more advanced orchestration patterns for HR workflows.
+- **Phase 5 — Multi-Agent System**: Builds a prototype of a coordinated multi-agent HR assistant with subagents for domain-specific tasks, a supervisor for delegation and convergence, and a summarizer for cohesive user-facing responses.
 
 Primary problems this project addresses
 - Centralized HR knowledge: consolidating policies and templates across countries into a searchable knowledge base.
