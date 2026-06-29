@@ -36,7 +36,9 @@ load_dotenv()
 # ============================================================
 # CONFIGURATION
 # ============================================================
-VECTOR_STORE_PATH = "vectorstore/hr_chroma_db"
+from pathlib import Path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+VECTOR_STORE_PATH = str(PROJECT_ROOT / "vectorstore" / "hr_chroma_db")
 UPLOADS_PATH      = "data/uploads"
 CHUNK_SIZE        = 800
 CHUNK_OVERLAP     = 150
@@ -156,7 +158,7 @@ class HRAssistant:
     def __init__(self, vectorstore: Chroma, country: str):
         self.country     = country.lower()
         self.history     = []
-        self.llm         = ChatGroq(model="llama-3.1-8b-instant", temperature=0.2)
+        self.llm         = ChatGroq(model="openai/gpt-oss-20b", temperature=0.2)
         self.retriever   = vectorstore.as_retriever(
             search_type   = "similarity",
             search_kwargs = {

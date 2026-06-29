@@ -146,7 +146,7 @@ import json
 
 load_dotenv()
 
-llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.5)
+llm = ChatGroq(model="openai/gpt-oss-20b", temperature=0.5)
 
 # -----------------------------------------------------------
 # 1. The prompt

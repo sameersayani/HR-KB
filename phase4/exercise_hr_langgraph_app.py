@@ -29,7 +29,9 @@ from langchain_community.vectorstores import Chroma
 from phase3.step3_document_manager import DocumentManager
 from phase4.step4_graph_assembly   import build_hr_graph, make_initial_state
 
-VECTOR_STORE_PATH   = "vectorstore/hr_chroma_db"
+from pathlib import Path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+VECTOR_STORE_PATH   = str(PROJECT_ROOT / "vectorstore" / "hr_chroma_db")
 SUPPORTED_COUNTRIES = [
     "india", "usa", "uk", "germany", "australia",
     "canada", "singapore", "uae", "france", "japan",

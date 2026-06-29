@@ -23,9 +23,11 @@ from langchain_community.vectorstores import Chroma
 from phase3.step3_document_manager import DocumentManager
 import tempfile, os
 
-VECTOR_STORE_PATH = "vectorstore/hr_chroma_db"
+from pathlib import Path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+VECTOR_STORE_PATH = str(PROJECT_ROOT / "vectorstore" / "hr_chroma_db")
 SUPPORTED_COUNTRIES = [
-    "India", "USA", "UK", "Mauritius", "Germany", "Australia",
+    "India", "USA", "UK", "Germany", "Australia",
     "Canada", "Singapore", "UAE", "France", "Japan",
 ]
 
@@ -229,4 +231,4 @@ with tab_documents:
                 df = pd.DataFrame(all_docs)[["country", "filename", "chunk_count"]]
                 df.columns = ["Country", "Filename", "Chunks"]
                 df = df.sort_values(["Country", "Filename"])
-                st.dataframe(df, width="stretch", hide_index=True)
+                st.dataframe(df, use_container_width=True, hide_index=True)

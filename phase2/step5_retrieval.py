@@ -12,7 +12,9 @@
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 
-VECTOR_STORE_PATH = "vectorstore/hr_chroma_db"
+from pathlib import Path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+VECTOR_STORE_PATH = str(PROJECT_ROOT / "vectorstore" / "hr_chroma_db")
 
 # -----------------------------------------------------------
 # 1. Load the vector store (already created in step 4)

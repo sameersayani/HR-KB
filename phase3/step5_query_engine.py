@@ -12,15 +12,16 @@ import os
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
-# FIXED: Using the standalone langchain-chroma package to resolve the deprecation warning
-from langchain_chroma import Chroma
+from langchain_community.vectorstores import Chroma
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv()
 
-VECTOR_STORE_PATH = "vectorstore/hr_chroma_db"
+from pathlib import Path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+VECTOR_STORE_PATH = str(PROJECT_ROOT / "vectorstore" / "hr_chroma_db")
 HIGH_THRESHOLD    = 0.70
 MEDIUM_THRESHOLD  = 0.45
 
@@ -28,7 +29,7 @@ MEDIUM_THRESHOLD  = 0.45
 # SETUP
 # ============================================================
 print("Loading components...")
-llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.2)
+llm = ChatGroq(model="openai/gpt-oss-20b", temperature=0.2)
 
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2",
@@ -204,18 +205,13 @@ if __name__ == "__main__":
         ("How many days annual leave in India?",    "india"),
         ("What is the 401k matching policy?",       "usa"),
         ("How does UK shared parental leave work?", "uk"),
-        ("What is the leave policy in Mauritius?",  "mauritius"),
 
         # MEDIUM confidence — supplemented answer
-        ("Can I take leave without prior approval?",     "india"),
-        ("What are the rules around working remotely?",  "usa"),
-        ("How does redundancy pay work?",                "uk"),
-        ("What about minimum work contract duration?",   "mauritius"),
+        ("Can I take leave without prior approval?","india"),
 
         # LOW confidence — should route to web search
         ("What are the visa sponsorship options?",  "india"),
         ("Explain cryptocurrency tax in the UK",    "uk"),
-        ("What about work permits?",                "mauritius"),
     ]
 
     for question, country in test_queries:

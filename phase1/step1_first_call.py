@@ -29,7 +29,7 @@ load_dotenv()
 #     temperature=0.3,
 # )
 
-llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.3)
+llm = ChatGroq(model="openai/gpt-oss-20b", temperature=0.3)
 # -----------------------------------------------------------
 # 2. Messages — the building blocks of every LLM conversation
 # -----------------------------------------------------------

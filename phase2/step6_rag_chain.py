@@ -20,14 +20,16 @@ from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv()
 
-VECTOR_STORE_PATH = "vectorstore/hr_chroma_db"
+from pathlib import Path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+VECTOR_STORE_PATH = str(PROJECT_ROOT / "vectorstore" / "hr_chroma_db")
 
 # -----------------------------------------------------------
 # 1. Setup LLM + embeddings + vector store
 # -----------------------------------------------------------
 print("Initialising components...")
 
-llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.2)
+llm = ChatGroq(model="openai/gpt-oss-20b", temperature=0.2)
 
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2",

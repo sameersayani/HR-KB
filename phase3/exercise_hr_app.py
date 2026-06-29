@@ -2,40 +2,38 @@
 # PHASE 3 - EXERCISE (Capstone): Full HR Knowledge Base App
 # ============================================================
 # Run with: streamlit run phase3/exercise_hr_app.py
+#
+# This is the complete Phase 3 application combining:
+#   ✅ Step 1: Multi-tenant store (country isolation)
+#   ✅ Step 2: Confidence scoring (HIGH/MEDIUM/LOW routing)
+#   ✅ Step 3: Document Manager (add/list/delete)
+#   ✅ Step 4: Admin UI (upload, manage documents)
+#   ✅ Step 5: Smart Query Engine (RAG + routing)
+#
+# TWO MODES IN ONE APP:
+#   🔧 Admin Mode  → HR admins upload & manage documents
+#   💬 User Mode   → Employees ask HR questions
 # ============================================================
 
-# --- FIX 1: SILENCE LOGGER NOISE (Must be at the very top) ---
-import tempfile
-
-import streamlit as st  # <-- Move this to the absolute line 1!
-import logging
-import warnings
-import os
-import sys
+import streamlit as st
+import tempfile, os, sys
 from pathlib import Path
 from dotenv import load_dotenv
-
-# Suppress noisy lower-tier console alerts cleanly without cutting threads
-warnings.filterwarnings("ignore", category=UserWarning)
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-os.environ["TOKENIZERS_PARALLELISM"] = "false"
-
-import transformers
-transformers.logging.set_verbosity_error()
 
 load_dotenv()
 sys.path.append(str(Path(__file__).parent.parent))
 
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
-# FIX 2: Changed from langchain_community.vectorstores to langchain_chroma
-from langchain_chroma import Chroma 
+from langchain_community.vectorstores import Chroma
 from phase3.step3_document_manager import DocumentManager
 from phase3.step5_query_engine import smart_query
 
-VECTOR_STORE_PATH   = "vectorstore/hr_chroma_db"
+from pathlib import Path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+VECTOR_STORE_PATH   = str(PROJECT_ROOT / "vectorstore" / "hr_chroma_db")
 SUPPORTED_COUNTRIES = [
-    "india", "usa", "uk", "mauritius", "germany", "australia",
+    "india", "usa", "uk", "germany", "australia",
     "canada", "singapore", "uae", "france", "japan",
 ]
 
@@ -58,7 +56,6 @@ def load_resources():
         model_kwargs={"device": "cpu"},
         encode_kwargs={"normalize_embeddings": True},
     )
-    # This now safely initializes using the updated langchain_chroma package
     vs = Chroma(
         persist_directory  = VECTOR_STORE_PATH,
         embedding_function = embeddings,
@@ -278,4 +275,4 @@ else:
             df = pd.DataFrame(all_docs)[["country","filename","chunk_count"]]
             df.columns = ["Country","Filename","Chunks"]
             st.dataframe(df.sort_values(["Country","Filename"]),
-             width="stretch", hide_index=True)
+                         use_container_width=True, hide_index=True)

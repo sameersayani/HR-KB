@@ -74,7 +74,9 @@ print(f"Total chunks ready to embed: {len(all_chunks)}\n")
 #   - First run: slow (embedding takes time)
 #   - Subsequent runs: load from disk (fast)
 
-VECTOR_STORE_PATH = "vectorstore/hr_chroma_db"
+from pathlib import Path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+VECTOR_STORE_PATH = str(PROJECT_ROOT / "vectorstore" / "hr_chroma_db")
 
 print(f"Creating vector store at: {VECTOR_STORE_PATH}")
 print("Embedding documents (this takes 30-60 seconds on first run)...\n")

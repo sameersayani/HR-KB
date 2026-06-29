@@ -40,12 +40,14 @@ class HRGraphState(TypedDict):
     web_results     : list
 
 # ── setup shared resources ────────────────────────────────────
-VECTOR_STORE_PATH = "vectorstore/hr_chroma_db"
+from pathlib import Path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+VECTOR_STORE_PATH = str(PROJECT_ROOT / "vectorstore" / "hr_chroma_db")
 HIGH_THRESHOLD    = 0.40
 MEDIUM_THRESHOLD  = 0.25
 
 print("Loading shared resources...")
-llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.2)
+llm = ChatGroq(model="openai/gpt-oss-20b", temperature=0.2)
 
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2",
@@ -218,6 +220,7 @@ def llm_supplement_node(state: HRGraphState) -> dict:
         "node_log"   : ["llm_supplement → docs + LLM"],
     }
 
+
 # ============================================================
 # NODE 5: web_search_node  (LOW confidence path)
 # ============================================================
@@ -228,22 +231,17 @@ def web_search_node(state: HRGraphState) -> dict:
     """Search the web using Tavily for questions not in HR docs."""
     try:
         from langchain_tavily import TavilySearch
-        tool     = TavilySearch(max_results=3)
-        query    = f"{state['question']} {state['country']} employment law HR policy"
-        response = tool.invoke({"query": query})
+        tool    = TavilySearch(max_results=3)
+        query   = f"{state['question']} {state['country']} employment law HR policy"
+        results = tool.invoke({"query": query})
 
-        # ── FIX: extract the actual results list ──────────────
-        if isinstance(response, dict):
-            results = response.get("results", [])
-        else:
-            results = response  # fallback if it's already a list
-        # ────────────────────────────────────────────────────────
-
+        # results is a list of dicts with 'url', 'content', 'title'
         if not results:
             raise ValueError("No results returned")
 
+        # Build a context string from web results
         context_parts = []
-        sources        = []
+        sources       = []
         for r in results:
             context_parts.append(
                 f"Source: {r.get('url', 'unknown')}\n{r.get('content', '')}"
@@ -273,6 +271,7 @@ Web search results:
         }
 
     except Exception as e:
+        # Fallback if Tavily not configured yet
         print(f"  [web_search] Tavily not available: {e}")
         fallback_answer = (
             f"I searched for information about '{state['question']}' "
@@ -286,6 +285,7 @@ Web search results:
             "web_results": [],
             "node_log"   : ["web_search → tavily unavailable → fallback"],
         }
+
 
 # ============================================================
 # NODE 6: format_response_node
