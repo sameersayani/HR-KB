@@ -1,4 +1,4 @@
-# HR-KB — HR Knowledge Base (prototype)
+# HR-KB — HR Knowledge Base Solution
 
 Brief: HR-KB is a multi-phase prototype that builds an HR knowledge-base and retrieval-powered assistant. It demonstrates document ingestion, embedding/vector storage, retrieval-augmented generation (RAG), multitenant document management, confidence scoring, and an experimental LangGraph integration for richer graph-driven workflows.
 
