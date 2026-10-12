@@ -3,6 +3,7 @@ langchain
 langchain-groq
 langchain-community
 langchain-huggingface
+langchain-text-splitters
 
 # Document loaders
 pypdf
