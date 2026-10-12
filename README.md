@@ -37,17 +37,17 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-2. Run a phase script (example — Phase 2 ingestion):
+2. Start the root launcher to choose any phase, lesson, or capstone:
 
 ```powershell
-python phase2/step1_document_loading.py
+python app.py
 ```
 
-3. Launch the Phase 4 Streamlit demo (if dependencies installed):
+The launcher runs terminal lessons directly and starts Streamlit for the Phase 3–5 apps. Install the requirements for the phase you want to run first, as described in that phase's README. For example:
 
 ```powershell
-cd phase4
-streamlit run exercise_hr_langgraph_app.py --server.port 8520
+pip install -r phase2/requirements.txt
+pip install -r phase4/requirements.txt
 ```
 
 Notes and next steps
