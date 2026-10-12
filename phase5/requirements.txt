@@ -1,3 +1,30 @@
+# LLM
+langchain
+langchain-groq
+langchain-community
+langchain-huggingface
+
+# Document loaders
+pypdf
+python-docx
+unstructured
+
+# Embeddings (runs locally, no API key needed)
+sentence-transformers
+
+# Vector database
+chromadb
+
+# Utilities
+python-dotenv
+
+# Streamlit UI
+streamlit
 
 # Phase 5
 pandas
+
+# Multi-agent workflow and web search
+langgraph
+langchain-tavily
+tavily-python
